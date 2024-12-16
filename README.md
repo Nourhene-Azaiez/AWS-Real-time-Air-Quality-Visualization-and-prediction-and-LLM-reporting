@@ -65,7 +65,11 @@ The following AWS services are used in the architecture:
 11. **LLM Integration:** Large Language Models (LLMs) are integrated for report generation and deeper insights into predicted values.
 12. **ngrok**: Exposes the local API Gateway for external testing.
 
-![Architecture Diagram](Images/Architecture.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Images/Architecture-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="Images/Architecture-light.png">
+  <img alt="Architecture Diagram" src="Images/Architecture-light.png">
+</picture>
 
 <!-- ## Prerequisites -->
 
@@ -86,7 +90,6 @@ The following AWS services are used in the architecture:
 5. Create a Python script (`fetch_data.py`) to fetch data from the OpenWeather API.
 It is important to configure the Kinesis client before fetching the data and set up the AWS Credentials:
     ```python
-    # AWS Credentials
     aws_region = "your-region-here"
     aws_access_key_id="aws-access-id"
     aws_secret_access_key="your-secret-access-keye-here"
@@ -190,9 +193,16 @@ AWS Management Console → AWS Details section when you sign in to your AWS inte
 
 ## Results
 ### Data Visualisation Dashboard
-![Data Visualisation](Images/vis1.png)
-![Data Visualisation](Images/vis2.png)
-
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Images/vis1-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="Images/vis1-light.png">
+  <img alt="Data Visualisation" src="Images/vis1-light.png">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Images/vis2-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="Images/vis2-light.png">
+  <img alt="Data Visualisation" src="Images/vis2-light.png">
+</picture>
 ## Contributing
 If you have suggestions for improving the pipeline or visualizations, feel free to fork the repository and submit pull requests.
 
