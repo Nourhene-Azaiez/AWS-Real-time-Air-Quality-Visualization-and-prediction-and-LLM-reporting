@@ -1,4 +1,4 @@
-# Weather Data Pipeline on AWS
+# AWS Real time Air Quality Visualization, prediction and LLM reporting
 
 ## Description
 This cloud-based solution monitors, analyzes, forecasts air quality and generates LLM-powered reports using real-time and historical data from the OpenWeather Air Pollution API. It empowers timely interventions, promotes cleaner practices, and raises awareness, contributing to improved public health, reduced pollution, and sustainable urban development.
