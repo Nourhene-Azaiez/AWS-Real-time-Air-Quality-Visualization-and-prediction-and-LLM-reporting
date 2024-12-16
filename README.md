@@ -5,6 +5,7 @@ This cloud-based solution monitors, analyzes, forecasts air quality and generate
 
 ## Table of Contents
 - [Overview](#overview)
+- [Repository Structure](#repository-structure)
 - [Architecture](#architecture)
 <!-- - [Prerequisites](#prerequisites) -->
 - [Deployment Steps](#deployment-steps)  
@@ -47,6 +48,32 @@ Large Language Models (LLMs) are used for generating reports and gaining deeper 
 
 #### 7. Automated Data Management:
 The entire pipeline is automated, allowing for continuous updates, error handling, and scalability, ensuring that the system can handle a large volume of weather data efficiently.
+
+## Repository Structure:
+```bash
+  .
+  ├── Data Fetch
+  │   └── fetch_data.py
+  ├── Images
+  │   ├── Architecture-dark.png
+  │   ├── Architecture-light.png
+  │   ├── llm-dark.png
+  │   ├── llm-light.png
+  │   ├── pred-dark.png
+  │   ├── pred-light.png
+  │   ├── vis1-dark.png
+  │   ├── vis1-light.png
+  │   ├── vis2-dark.png
+  │   └── vis2-light.png
+  ├── Lambda-function
+  │   └── data_transformation.py
+  ├── README.md
+  ├── Report-Generation
+  │   └── llm.py
+  └── useful
+      ├── countries.csv
+      └── data_schema.json
+```
 
 ## Architecture
 
@@ -153,6 +180,8 @@ To visualize the air pollution data, we installed Grafana on an `t2.medium` EC2 
 
 ##### Grafana Installation
 1. Download and run Grafana:
+  - Create an t2.medium EC2 Instance and update the inbound rules on port 3000
+  - Open the Instance terminal and install Grafana
     ```bash
     sudo yum update -y
     sudo yum install grafana -y
@@ -187,9 +216,55 @@ AWS Management Console → AWS Details section when you sign in to your AWS inte
 
 
 ### LLM Integration
+
+This section demonstrates how to integrate a Large Language Model (LLM) into the project for enhanced report generation and insights.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Images/llm-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="Images/llm-light.png">
+  <img alt="LLM Architecture" src="Images/llm-light.png">
+</picture>
+
 #### Step 1: Set Grafana Variables
+1. Open your Grafana Dashboard.
+2. Navigate to **Settings** > **Variables**.
+3. - Create a custom variable for each predicted Value as well as the month to generate the report on.
+   - Set the data source as the source of the model prediction
+4. Test the variables by applying them to a sample panel.
+
 #### Step 2: Load the LLM
+1. **Prepare the LLM Environment**:
+   - Install the required Python libraries such as `transformers`, `flask` and `logging` (optional):
+     ```bash
+     pip install transformers flask logging
+     ```
+2. **Create a Script for LLM Integration**:
+   - Write a Python script to query the LLM for analyzing the predicted values of pollutants and AQI: `llm.py`
+
+3. **Integrate LLM Output into Grafana**:
+   - Use Grafana's **Table Pannel** to display LLM-generated report.
+
 #### Step 3: Setup ngrok
+1. **Install ngrok**:
+   - Download and install ngrok from [ngrok.com](https://ngrok.com/).
+   - Authenticate using your ngrok account:
+     ```bash
+     ngrok authtoken <YOUR_AUTH_TOKEN>
+     ```
+
+2. **Expose Local Services**:
+   - Use ngrok to expose your local API Gateway or LLM services:
+     ```bash
+     ngrok http 5000
+     ```
+
+3. **Update API Endpoints**:
+   - Copy the generated ngrok URL and use it in your Grafana data source to access the LLM service remotely.
+   - Example:
+     ```bash
+     Forwarding    https://<unique-id>.ngrok.io -> localhost:5000
+     ```
+
 
 ## Results
 ### Data Visualisation Dashboard
@@ -203,6 +278,14 @@ AWS Management Console → AWS Details section when you sign in to your AWS inte
   <source media="(prefers-color-scheme: light)" srcset="Images/vis2-light.png">
   <img alt="Data Visualisation" src="Images/vis2-light.png">
 </picture>
+
+### Air Quality Forecast and LLM-Generated Report Dashboard
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Images/pred-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="Images/pred-light.png">
+  <img alt="Prediction and report Visualisation" src="Images/pred-light.png">
+</picture>
+
 ## Contributing
 If you have suggestions for improving the pipeline or visualizations, feel free to fork the repository and submit pull requests.
 
