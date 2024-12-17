@@ -7,7 +7,7 @@ This cloud-based solution monitors, analyzes, forecasts air quality and generate
 - [Overview](#overview)
 - [Repository Structure](#repository-structure)
 - [Architecture](#architecture)
-<!-- - [Prerequisites](#prerequisites) -->
+- [Prerequisites](#prerequisites)
 - [Deployment Steps](#deployment-steps)  
    1. [Data Pipeline Setup](#data-pipeline-setup)  
         - [Step 1: Set up EC2 Instance with cloud9 environment](#step-1-set-up-ec2-instance)  
@@ -55,22 +55,12 @@ The entire pipeline is automated, allowing for continuous updates, error handlin
   ├── Data Fetch
   │   └── fetch_data.py
   ├── Images
-  │   ├── Architecture-dark.png
-  │   ├── Architecture-light.png
-  │   ├── llm-dark.png
-  │   ├── llm-light.png
-  │   ├── pred-dark.png
-  │   ├── pred-light.png
-  │   ├── vis1-dark.png
-  │   ├── vis1-light.png
-  │   ├── vis2-dark.png
-  │   └── vis2-light.png
-  ├── Lambda-function
+  ├── Lambda_function
   │   └── data_transformation.py
   ├── README.md
   ├── Report-Generation
   │   └── llm.py
-  └── useful
+  └── datasets
       ├── countries.csv
       └── data_schema.json
 ```
@@ -98,7 +88,54 @@ The following AWS services are used in the architecture:
   <img alt="Architecture Diagram" src="Images/Architecture-light.png">
 </picture>
 
-<!-- ## Prerequisites -->
+## Prerequisites
+
+To successfully set up and deploy this project, you will need the following:
+
+### 1. **AWS Account**
+   - An active AWS account with permissions to use services like EC2, S3, Lambda, Kinesis, Glue, Athena, SageMaker, and API Gateway.
+
+### 2. **OpenWeather API Key**
+   - Sign up at [OpenWeather](https://openweathermap.org/api) to get an API key for the Air Pollution API.
+
+### 3. **AWS IAM Roles and Policies**
+  - Create or configure IAM roles with permissions for the following services:
+  - Amazon EC2
+  - Amazon Kinesis
+  - Amazon S3
+  - AWS Lambda
+  - AWS Glue
+  - Amazon Athena
+  - Amazon SageMaker
+  - Attach policies like `AmazonS3FullAccess`, `AmazonKinesisFullAccess`, and `AWSLambdaBasicExecutionRole`.
+
+### 4. **Python Environment**
+   - Ensure Python 3.x is installed along with required libraries:
+     ```bash
+     pip install boto3 requests json time
+     ```
+
+### 6. **Grafana Setup**
+   - Download Grafana for your environment or plan to set it up on an EC2 instance.
+   - Guide: [Grafana Installation](https://grafana.com/docs/grafana/latest/setup-grafana/installation/).
+
+### 7. **ngrok**
+   - Install `ngrok` to expose local APIs for testing.
+   - Download: [ngrok](https://ngrok.com/download).
+
+### 8. **Access Credentials**
+   - AWS access key ID and secret access key for programmatic access.
+   - Ensure the credentials are stored securely using environment variables or AWS credentials files.
+
+### 9. **GPU Support**:  
+   Ensure that your system has GPU support for accelerated tasks. You can check if your system has a compatible GPU by running:
+   - **For NVIDIA GPUs**:  
+     `nvidia-smi` (This will display the GPU details if the NVIDIA drivers are correctly installed)
+   - **For AMD GPUs**:  
+     `lspci | grep VGA` (This will display the details of the GPU if it's detected)
+   
+   **Note**: You may need to install additional drivers or libraries like CUDA (for NVIDIA GPUs) or ROCm (for AMD GPUs).
+
 
 ## Deployment Steps
 ### Data Pipeline Setup
@@ -130,7 +167,6 @@ It is important to configure the Kinesis client before fetching the data and set
         aws_session_token=aws_session_token)
     ```
 ##### Note: 
-- This  data stream creation is detailed in the following step.
 - It is necessary to have an S3 bucket named `useful-data-bucket` that containes the csv file `countries.csv`.
 
 
@@ -180,13 +216,13 @@ To visualize the air pollution data, we installed Grafana on an `t2.medium` EC2 
 
 ##### Grafana Installation
 1. Download and run Grafana:
-  - Create an t2.medium EC2 Instance and update the inbound rules on port 3000
-  - Open the Instance terminal and install Grafana
-    ```bash
-    sudo yum update -y
-    sudo yum install grafana -y
-    sudo systemctl daemon-reload
-    ```
+    - Create an t2.medium EC2 Instance and update the inbound rules on port 3000
+    - Open the Instance terminal and install Grafana
+      ```bash
+      sudo yum update -y
+      sudo yum install grafana -y
+      sudo systemctl daemon-reload
+      ```
 2. Create the file `credentials`in the folder path `usr/share/grafana/.aws` and store your AWS credentials inside.
     - These tokens are available in your AWS console under:
 AWS Management Console → AWS Details section when you sign in to your AWS interface.
