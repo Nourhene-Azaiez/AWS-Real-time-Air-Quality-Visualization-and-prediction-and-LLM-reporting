@@ -1,55 +1,55 @@
-# AWS Real time Air Quality Visualization, prediction and LLM reporting
+# 🌎 AWS Real time Air Quality Visualization, prediction and LLM reporting
 
-## Description
+## 📄 Description
 This cloud-based solution monitors, analyzes, forecasts air quality and generates LLM-powered reports using real-time and historical data from the OpenWeather Air Pollution API. It empowers timely interventions, promotes cleaner practices, and raises awareness, contributing to improved public health, reduced pollution, and sustainable urban development.
 
-## Table of Contents
-- [Overview](#overview)
-- [Repository Structure](#repository-structure)
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
-- [Deployment Steps](#deployment-steps)  
-   1. [Data Pipeline Setup](#data-pipeline-setup)  
-        - [Step 1: Set up EC2 Instance with cloud9 environment](#step-1-set-up-ec2-instance)  
-        - [Step 2: Configure Kinesis Data Streams](#step-2-configure-kinesis-data-streams)  
-        - [Step 3: Lambda Function Setup](#step-3-lambda-function-setup)  
-        - [Step 4: Store Data in S3](#step-4-store-data-in-s3)  
-        - [Step 5: Set up AWS Glue Crawlers and Tables](#step-5-set-up-aws-glue-crawlers-and-tables)  
-        - [Step 6: Query Data Using Athena](#step-6-query-data-using-athena)  
-        - [Step 7: Visualize with Grafana](#step-7-visualize-with-grafana)    
-    2. [LLM Integration](#llm-integration)
-        - [Step 1: Set Grafana Variables](#step-1-set-grafana-variables)  
-        - [Step 2: Load the LLM](#step-2-load-the-llm)
-        - [Step 3: Setup ngrok](#step-3-setup-ngrok)
-- [Results](#results)
-- [Contributing](#contributing)
+## 📑 Table of Contents
+- [📌 Overview](#📌-overview)
+- [📁 Repository Structure](#📁-repository-structure)
+- [🏗️ Architecture](#🏗️-architecture)
+- [⚙️ Prerequisites](#⚙️-prerequisites)
+- [🚀 Deployment Steps](#🚀-deployment-steps)  
+   1. [Data Pipeline Setup](#🔧-data-pipeline-setup)  
+        - [Step 1: Set up EC2 Instance with cloud9 environment](#💻-step-1-set-up-ec2-instance-with-cloud9-environment)  
+        - [Step 2: Configure Kinesis Data Streams](#🔗-step-2-configure-kinesis-data-streams)  
+        - [Step 3: Lambda Function Setup](#⚡-step-3-lambda-function-setup)  
+        - [Step 4: Store Data in S3](#🗂️-step-4-store-data-in-s3)  
+        - [Step 5: Set up AWS Glue Crawlers and Tables](#🔍-step-5-set-up-aws-glue-crawlers-and-tables)  
+        - [Step 6: Query Data Using Athena](#📊-step-6-query-data-using-athena)  
+        - [Step 7: Visualize with Grafana](#📈-step-7-visualize-with-grafana)    
+    2. [LLM Integration](#🧠-llm-integration)
+        - [Step 1: Set Grafana Variables](#⚙️-step-1-set-grafana-variables)  
+        - [Step 2: Load the LLM](#📥-step-2-load-the-llm)
+        - [Step 3: Setup ngrok](#🌐-step-3-setup-ngrok)
+- [🎯 Results](#🎯-results)
+- [🤝 Contributing](#🤝-contributing)
 
-## Overview
+## 📌 Overview
 This project is designed to collect, process, and visualize real-time weather data by leveraging AWS services, OpenWeather API, and machine learning tools. The pipeline automates the retrieval of weather data, stores it efficiently in the cloud, processes it for analytics, and makes it accessible for real-time visualization and predictive analysis.
 
-### Key Features:
-#### 1. Real-time Data Ingestion:
+### ⭐ Key Features:
+#### 1. 📡 Real-time Data Ingestion:
 Weather data is continuously fetched from the OpenWeather API using an EC2 instance, ensuring up-to-date weather information.
 
-#### 2. Data Streaming & Processing:
+#### 2. 🔄 Data Streaming & Processing:
 The data is streamed through Amazon Kinesis Data Streams, providing a scalable way to handle incoming data in real time. AWS Lambda functions are triggered to process the data, transforming it into a structured format and storing it in Amazon S3.
 
-#### 3. Data Transformation & Cataloging:
+#### 3. 🔧 Data Transformation & Cataloging:
 AWS Glue Crawlers automatically discover and catalog the processed data, while Amazon Athena allows users to run SQL queries on the stored data. This makes the data easily accessible for reporting and analysis.
 
-#### 4. Visualization with Grafana:
+#### 4. 📊 Visualization with Grafana:
 Grafana is integrated to create dashboards that visualize key metrics like temperature, humidity, and weather conditions. This enables users to monitor trends and gain insights into the data in real time.
 
-#### 5. Machine Learning:
+#### 5. 🤖 Machine Learning:
 AWS SageMaker is used to train and deploy machine learning models for weather predictions, such as forecasting temperature or predicting weather conditions. These models are exposed through an API Gateway and can be accessed for inference.
 
-#### 6. Large Language Model (LLM) Integration:
+#### 6. 🧠 Large Language Model (LLM) Integration:
 Large Language Models (LLMs) are used for generating reports and gaining deeper insights into the weather data, making the information more accessible and understandable for decision-makers.
 
-#### 7. Automated Data Management:
+#### 7. 🔁 Automated Data Management:
 The entire pipeline is automated, allowing for continuous updates, error handling, and scalability, ensuring that the system can handle a large volume of weather data efficiently.
 
-## Repository Structure:
+## 📁 Repository Structure:
 ```bash
   .
   ├── Data Fetch
@@ -65,7 +65,7 @@ The entire pipeline is automated, allowing for continuous updates, error handlin
       └── data_schema.json
 ```
 
-## Architecture
+## 🏗️ Architecture
 
 The following AWS services are used in the architecture:
 
@@ -88,7 +88,7 @@ The following AWS services are used in the architecture:
   <img alt="Architecture Diagram" src="Images/Architecture-light.png">
 </picture>
 
-## Prerequisites
+## ⚙️ Prerequisites
 
 To successfully set up and deploy this project, you will need the following:
 
@@ -174,10 +174,10 @@ To successfully set up and deploy this project, you will need the following:
 
 
 
-## Deployment Steps
-### Data Pipeline Setup
+## 🚀 Deployment Steps
+### 🔧 Data Pipeline Setup
 
-#### Step 1: Set up EC2 Instance with cloud9 environment 
+#### 💻 Step 1: Set up EC2 Instance with cloud9 environment 
 1. Go to the Cloud9 dashboard in the AWS Management Console.
 2. Launch a new Cloud9 environment with a new EC2 Instance.
     - Choose the instance type `t2.micro` with Amazon Linux.
@@ -207,12 +207,12 @@ It is important to configure the Kinesis client before fetching the data and set
 - It is necessary to have an S3 bucket named `useful-data-bucket` that containes the csv file `countries.csv`.
 
 
-#### Step 2: Configure Kinesis Data Streams 
+#### 🔗 Step 2: Configure Kinesis Data Streams 
 1. Navigate to the **Kinesis** section in AWS Console and Click on **Create stream**.
 2. Name your stream (e.g., `airpollution_data`), and define the number of shards based on your data volume or choose the `On-Demand` option.
 3. Once the stream is created, ensure the EC2 instance has the proper IAM role to send data to Kinesis.
 
-#### Step 3: Lambda Function Setup 
+#### ⚡ Step 3: Lambda Function Setup 
 1. Go to **AWS Lambda** and create a new function.
 2. Select **Author from scratch** and use an the python runtime.
 3. Set permissions for Lambda to read from Kinesis and write to S3.
@@ -222,14 +222,14 @@ It is important to configure the Kinesis client before fetching the data and set
     ```
 5. Use the Lambda function (`data_transformation.py`) to format data and write it into the S3 bucket.
 
-#### Step 4: Store Data in S3
+#### 🗂️ Step 4: Store Data in S3
 1. Create an S3 bucket:
    - Go to **S3** in AWS Console and click **Create Bucket** and specify a unique name (e.g. `airquality-databucket`).
    - Set permissions and configure the bucket to store the processed weather data.
    - The data is stored in folders, each folder designating a specific country and its corresponding data.
 2. Ensure that the Lambda function has the appropriate IAM role to write data to S3.
 
-#### Step 5: Set up AWS Glue Crawlers and Tables
+#### 🔍 Step 5: Set up AWS Glue Crawlers and Tables
 1. Go to **AWS Glue Databases** and create a new Database with a unique name (e.g. `airquality_base`).
 3. Go to **AWS Glue** and create a new Crawler.
 4. - Define the source as the S3 bucket where weather data is stored.
@@ -237,7 +237,7 @@ It is important to configure the Kinesis client before fetching the data and set
     - Set up the crawler to run on a scheduled basis (e.g., every hour) to keep the Glue Catalog up-to-date.
 5. After running the whole pipeline, navigate to the AWS Glue Table schema and make sure it is identical to `data_schema.json` or update it.
 
-#### Step 6: Query Data Using Athena
+#### 📊 Step 6: Query Data Using Athena
 1. In the **Athena** console, create a new database (for query results storage).
 2. Define a table that references the Glue cataloged data in S3.
 3. Run SQL queries to analyze the air quality data.
@@ -246,7 +246,7 @@ It is important to configure the Kinesis client before fetching the data and set
    SELECT * FROM "airquality_base"."airquality_databucket" limit 30;
    ```
 
-#### Step 7: Visualize with Grafana
+#### 📈 Step 7: Visualize with Grafana
 
 ##### Install Grafana
 To visualize the air pollution data, we installed Grafana on an `t2.medium` EC2 instance
@@ -288,7 +288,7 @@ AWS Management Console → AWS Details section when you sign in to your AWS inte
 3. Configure queries for each panel.
 
 
-### LLM Integration
+### 🧠 LLM Integration
 
 This section demonstrates how to integrate a Large Language Model (LLM) into the project for enhanced report generation and insights.
 
@@ -298,14 +298,14 @@ This section demonstrates how to integrate a Large Language Model (LLM) into the
   <img alt="LLM Architecture" src="Images/llm-light.png">
 </picture>
 
-#### Step 1: Set Grafana Variables
+#### ⚙️ Step 1: Set Grafana Variables
 1. Open your Grafana Dashboard.
 2. Navigate to **Settings** > **Variables**.
 3. - Create a custom variable for each predicted Value as well as the month to generate the report on.
    - Set the data source as the source of the model prediction
 4. Test the variables by applying them to a sample panel.
 
-#### Step 2: Load the LLM
+#### 📥 Step 2: Load the LLM
 1. **Prepare the LLM Environment**:
    - Install the required Python libraries such as `transformers`, `flask` and `logging` (optional):
      ```bash
@@ -317,7 +317,7 @@ This section demonstrates how to integrate a Large Language Model (LLM) into the
 3. **Integrate LLM Output into Grafana**:
    - Use Grafana's **Table Pannel** to display LLM-generated report.
 
-#### Step 3: Setup ngrok
+#### 🌐 Step 3: Setup ngrok
 1. **Install ngrok**:
    - Download and install ngrok from [ngrok.com](https://ngrok.com/).
    - Authenticate using your ngrok account:
@@ -339,7 +339,7 @@ This section demonstrates how to integrate a Large Language Model (LLM) into the
      ```
 
 
-## Results
+## 🎯 Results
 ### Data Visualisation Dashboard
 
 #### 1. Total Data Count
@@ -426,7 +426,7 @@ This section demonstrates how to integrate a Large Language Model (LLM) into the
   <img alt="Prediction and report Visualisation" src="Images/pred-light.png">
 </picture>
 
-## Contributing
+## 🤝 Contributing
 If you have suggestions for improving the pipeline or visualizations, feel free to fork the repository and submit pull requests.
 
 ### Contributing Guidelines:
