@@ -110,7 +110,7 @@ To successfully set up and deploy this project, you will need the following:
   - Attach policies like `AmazonS3FullAccess`, `AmazonKinesisFullAccess`, and `AWSLambdaBasicExecutionRole`.
 
 ### 4. **Python Environment**
-   - Ensure Python 3.x is installed along with required libraries:
+   - Ensure Python 3.x is installed along with required libraries on your AWS EC2 and Lambda environment:
      ```bash
      pip install boto3 requests json time
      ```
@@ -127,14 +127,51 @@ To successfully set up and deploy this project, you will need the following:
    - AWS access key ID and secret access key for programmatic access.
    - Ensure the credentials are stored securely using environment variables or AWS credentials files.
 
-### 9. **GPU Support**:  
-   Ensure that your system has GPU support for accelerated tasks. You can check if your system has a compatible GPU by running:
-   - **For NVIDIA GPUs**:  
-     `nvidia-smi` (This will display the GPU details if the NVIDIA drivers are correctly installed)
-   - **For AMD GPUs**:  
-     `lspci | grep VGA` (This will display the details of the GPU if it's detected)
-   
-   **Note**: You may need to install additional drivers or libraries like CUDA (for NVIDIA GPUs) or ROCm (for AMD GPUs).
+### 9. **System Requirements**
+- **Operating System**: Linux, macOS, or Windows
+- **RAM**: 16 GB or higher recommended
+- **Storage**: At least 50 GB of free space (depending on model size)
+- **Python**: 3.8 or higher
+
+### 10. **GPU Requirements**
+- **NVIDIA GPU**: Ensure you have an NVIDIA GPU with CUDA support for accelerated model training and inference.
+- **CUDA and cuDNN**:  
+  - Install [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) (minimum version 11.x recommended).  
+  - Install [cuDNN](https://developer.nvidia.com/cudnn).  
+  - Verify installation by running:  
+    ```bash
+    nvidia-smi
+    ```
+    This will display GPU and CUDA driver details.
+- **TensorFlow GPU**:  
+  ```bash
+  pip install tensorflow-gpu
+  ```
+
+- **PyTorch with GPU Support** (Optional if using PyTorch):
+  ```bash
+  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+  ```  
+  Alternatively, follow the official installation guide [here](https://pytorch.org/get-started/locally/).
+
+### 11. **Python Environment Setup**
+- **Create Virtual Environment**:
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate  # Linux
+  ```
+### 12. **Model and Hugging Face Setup**
+- Install Hugging Face `transformers` and `datasets` libraries:
+  ```bash
+  pip install transformers datasets
+  ```
+- **Hugging Face Authentication**:
+  ```bash
+  huggingface-cli login
+  ```
+- Ensure you have access to the `meta-llama/Llama-3.2-3B-Instruct` model through Hugging Face.
+
+
 
 
 ## Deployment Steps
