@@ -341,6 +341,54 @@ This section demonstrates how to integrate a Large Language Model (LLM) into the
 
 ## Results
 ### Data Visualisation Dashboard
+
+#### 1. Total Data Count
+- **Description**: Displays the total number of air quality data points.
+
+#### 2. Air Quality Unique Count
+- **Visualization**: Pie chart
+- **Categories**:
+  - Fair
+  - Good
+  - Poor
+  - Very Poor
+  - Moderate
+
+#### 3. Average Air Quality Index by Continent
+- **Visualization**: Bar chart
+
+#### 4. Metric Impact
+- **Visualization**: Scatter plot
+- **Metrics**: Shows the impact of pollutants on AQI values.
+
+#### 5. Top 10 Most Polluted Countries
+- **Very Poor Regions**
+
+#### 6. Top 5 Cleanest Countries
+- **Good Regions**
+
+#### 7. Value Ranges
+- **Pollutant Levels**
+
+#### 8. Air Pollution World Map
+- **Visualization**: Global map with color-coded air quality labels:
+  - Good
+  - Fair
+  - Poor
+  - Very Poor
+
+#### 9. Detailed Data Tooltip
+- **Information Displayed on Hover**:
+  - **Timestamp**
+  - **Region**
+  - **Continent**
+  - **Longitude**
+  - **Latitude**
+  - **AQI Quality**
+  - **Pollutant Levels**
+
+**Purpose**: This dashboard provides a comprehensive overview of global air quality, offering insights into pollution levels, geographic distribution, and identifying clean and polluted regions.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="Images/vis1-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="Images/vis1-light.png">
@@ -353,6 +401,25 @@ This section demonstrates how to integrate a Large Language Model (LLM) into the
 </picture>
 
 ### Air Quality Forecast and LLM-Generated Report Dashboard
+
+#### Country Selection
+- **Dropdown** to select a country for air quality predictions.
+
+#### Metric Predictions for Selected Country
+- **Visualization**: Line graph showing predictions for AQI and specific pollutants for the coming year.
+
+#### Mean Values
+- **Visualization**: Displays mean pollutant levels (Global_AQI, no2, o3, pm10, pm2_5, so2).
+
+#### Report Description
+- **Details**: 
+  - Overview of air quality for the selected country.
+  - Highlights of AQI levels compared to WHO recommendations.
+  - Describes pollutants and their health implications.
+  - Identifies key pollution sources and trends.
+
+**Purpose**: This dashboard includes predictive analysis and detailed reports for specific countries.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="Images/pred-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="Images/pred-light.png">
